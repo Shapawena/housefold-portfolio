@@ -1619,7 +1619,7 @@ async function payNow(plan, amount){
   let email = prompt("Enter your email for receipt:");
   if(!email) return;
   try{
-    const res = await fetch("http://localhost:4000/api/paystack/initialize", {
+    const res = await fetch("http://housefold-backend.onrender.com/api/paystack/initialize", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify({email, plan, amount})
@@ -1662,7 +1662,7 @@ setTimeout(attachOrangeButtons, 1000);
 
 
 <script>
-const API = "http://localhost:5000";
+const API = "http://housefold-backend.onrender.com";
 
 // PAYSTACK
 async function payNow(plan, amount){
