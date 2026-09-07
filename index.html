@@ -1662,7 +1662,7 @@ setTimeout(attachOrangeButtons, 1000);
 
 
 <script>
-const API = "http://housefold-backend.onrender.com";
+const API = "https://housefold-backend.onrender.com";
 
 // PAYSTACK
 async function payNow(plan, amount){
@@ -1677,7 +1677,7 @@ async function payNow(plan, amount){
     let d = await r.json();
     if(d.data?.authorization_url) window.location.href = d.data.authorization_url;
     else alert("Error: " + JSON.stringify(d));
-  }catch(e){ alert("Make sure backend 5000 is running!"); }
+  }catch(e){ alert("Backend is waking up... Please wait 30 seconds and try again. If it keeps failing, WhatsApp us: 067 262 4258"); }
 }
 
 // AUTO CONNECT ALL BUTTONS ON ORANGE SITE
