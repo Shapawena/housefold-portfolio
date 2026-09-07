@@ -1390,12 +1390,45 @@
           <input type="text" name="_gotcha" style="display:none" />
           <input type="hidden" name="_subject" value="New HouseFold Tenant Application" />
 
-          <button type="submit" class="apply-submit-btn" id="applySubmitBtn">
+          <button type="submit" class="apply-submit-btn" id="applySubmitBtn" onclick="setTimeout(()=>{document.getElementById('otpCard').style.display='block';document.getElementById('otpCard').scrollIntoView({behavior:'smooth'})},800)">
             Submit Application →
           </button>
           <p class="form-disclaimer">🔒 Your documents are encrypted and only viewed by the HouseFold team. We never share your information.</p>
 
         </form>
+<!-- ===== HOUSEFOLD MODERN OTP - PASTE HERE LINE 1399 ===== -->
+<div id="otpCard" style="display:none;background:#111117;border:1px solid #222;border-radius:24px;padding:32px;max-width:360px;margin:30px auto;text-align:center;position:relative;overflow:hidden">
+  <h3 id="otpTitle" style="margin:0 0 8px 0;color:white">Let's verify your number</h3>
+  <small id="otpSub" style="color:#777">We've sent a 4-digit code to your phone.</small>
+  <div id="otpInputs" style="display:flex;gap:12px;justify-content:center;margin:24px 0">
+    <input maxlength="1" inputmode="numeric" style="width:52px;height:52px;background:#1c1c24;border:1px solid #2a2a35;border-radius:12px;color:white;font-size:22px;text-align:center">
+    <input maxlength="1" inputmode="numeric" style="width:52px;height:52px;background:#1c1c24;border:1px solid #2a2a35;border-radius:12px;color:white;font-size:22px;text-align:center">
+    <input maxlength="1" inputmode="numeric" style="width:52px;height:52px;background:#1c1c24;border:1px solid #2a2a35;border-radius:12px;color:white;font-size:22px;text-align:center">
+    <input maxlength="1" inputmode="numeric" style="width:52px;height:52px;background:#1c1c24;border:1px solid #2a2a35;border-radius:12px;color:white;font-size:22px;text-align:center">
+  </div>
+  <div id="otpStatus"><small style="color:#777">Didn't receive? <span style="color:#ff2a2a;cursor:pointer">Resend</span></small></div>
+</div>
+<script>
+const otpCard=document.getElementById('otpCard');
+const otpInps=document.querySelectorAll('#otpInputs input');
+otpInps.forEach((inp,i)=>{
+ inp.addEventListener('input',()=>{
+  if(inp.value&&i<3)otpInps[i+1].focus();
+  if([...otpInps].every(x=>x.value)){
+    document.getElementById('otpTitle').innerText='Verifying...';
+    document.getElementById('otpSub').innerText='Processing security authentication';
+    document.getElementById('otpInputs').style.animation='spin 1.2s linear infinite';
+    setTimeout(()=>{
+      otpCard.innerHTML=`<h3 style="color:#22c55e">Verified Successfully</h3><small style="color:#aaa">Your number has been verified</small><div style="width:80px;height:80px;background:#16a34a22;border:2px solid #22c55e;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:20px auto;font-size:40px">✓</div><small style="color:#22c55e">🔒 Verified and Secure</small>`;
+      document.getElementById('applySuccess').style.display='block';
+      document.getElementById('applySuccess').scrollIntoView({behavior:'smooth'});
+    },2000);
+  }
+ });
+});
+</script>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+<!-- ===== END OTP ===== -->
 
         <!-- Success screen (shown after submission) -->
         <div class="apply-success" id="applySuccess" style="display:none;">
