@@ -1723,7 +1723,7 @@ console.log("HouseFold Orange connected to port 5000");
 <script>
 function payTenant(){
   // Tenant FREE trial - go to Paystack R0 or register
-  window.location.href = 'http://localhost:5000/api/paystack/initialize?plan=tenant';
+  window.location.href = 'https://housefold-backend.onrender.com/api/paystack/initialize?plan=tenant';
 }
 
 function openLandlordModal(){
@@ -1736,7 +1736,7 @@ async function payLandlord(){
   const btn=document.getElementById('payBtn');
   btn.textContent='Redirecting to Paystack...';
   try{
-    const res=await fetch('http://localhost:5000/api/paystack/initialize',{
+    const res=await fetch('https://housefold-backend.onrender.com/api/paystack/initialize',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({email:'landlord@housefold.co.za',plan:'landlord_monthly',amount:10000})
@@ -1775,7 +1775,7 @@ if(params.get('payment')==='success'){
   alert('🎉 SUCCESS! R100 Payment Received!\n\nRef: '+ref+'\n\nWelcome to HouseFold! Your 1 month FREE starts now. Next billing: 30 days.');
 
   // Tell backend to verify & save
-  fetch(`http://localhost:5000/api/paystack/verify/${ref}`)
+  fetch(`https://housefold-backend.onrender.com/api/paystack/verify/${ref}`)
     .then(r=>r.json())
     .then(data=>{
       console.log('VERIFIED:', data);
